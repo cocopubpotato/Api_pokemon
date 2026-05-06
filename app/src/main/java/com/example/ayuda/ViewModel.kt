@@ -10,25 +10,32 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import kotlin.random.Random
 
+//PASO 5
+
+
+//Establecemos el view model que usaremos en la interfaz de usuario
 
 class PokenModel: ViewModel() {
 
-
-
-    //mostrar la lista de los pokemons en el habitat seleccionado
-    var pokemonlist= mutableStateListOf<datopoken>()
+    //estas dos son corrutinas
+    var pokemonlist= mutableStateListOf<datopoken>()  //donde se almacenan los datos de la lista para visualizarlos
         private set
-    var habitatname by mutableStateOf("")
+    var habitatname by mutableStateOf("") //almacenamos el nombre del habitat a seleccionar
         private set
+
 
     fun loadPokemon(){
         viewModelScope.launch {
-            val randomId= Random.nextInt(1,10)//1 al 9
-            val habitat = API().getHabitatFull(randomId) //para que pueda decir que habitat es el que salio
-            habitatname= habitat?.name ?: "desconocido"
-            Log.d("TEST", "agregado")
-            pokemonlist.clear()
-            pokemonlist.addAll(habitat?.pokemon_species ?: emptyList())
+            val randomId= Random.nextInt(1,10)//1 al 9  , para sacar aleatoriamente el habitat
+            val habitat = API().getHabitatFull(randomId) // funcion que establecimos en archivo API     ,para que pueda conseguir los datos completos del habitat seleccionado
+
+
+            habitatname= habitat?.name ?: "desconocido"  //almacenamos el dato del habitat actual y colocamos en caso de fallos
+            Log.d("TEST", "agregado")// prueba de que este funcional , se muestra en el logcat
+
+            pokemonlist.clear() //como la lista se actualiza cada que se presiona el boton pos la tenemos que limpiar
+            pokemonlist.addAll(habitat?.pokemon_species ?: emptyList()) //almacenamos la lista de los pokemones del habitat actual
+
         }
     }
 }

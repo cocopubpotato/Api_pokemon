@@ -12,6 +12,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
+
+//aqui es donde pondria una mejora pero aun no la hago tonces la pueden ignorar
+
+
 @Composable
 fun HabitatView(viewModel: PokenModel) {
     Column(

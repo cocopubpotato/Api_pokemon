@@ -14,7 +14,7 @@ interface interfase {
     ): Response<datoHabitat>
 
     /*
-    esta seria si solo quisiera sacar dato individual
+    esta seria si solo quisiera sacar un dato sencillo
 
     @GET("pokemon-habitat)
     suspend fun getHabitat(): Response<datoHabitat>
