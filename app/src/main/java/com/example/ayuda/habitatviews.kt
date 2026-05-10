@@ -22,8 +22,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 
 
-//aqui es donde pondria una mejora pero aun no la hago tonces la pueden ignorar
-
 
 @Composable
 fun HabitatView(navegador: NavHostController, viewModel: PokenModel) {
