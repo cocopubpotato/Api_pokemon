@@ -1,7 +1,5 @@
 package com.example.ayuda
 
-import java.sql.Types
-
 
 //PASO 3
 //para los que anden googleando son los endpoints porque es donde termina la informacion :P
