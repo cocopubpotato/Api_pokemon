@@ -21,11 +21,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 
-
+//Paso 6
+//VISTA 1
+//listado de los diferentes habitats que hay
 
 @Composable
 fun HabitatView(navegador: NavHostController, viewModel: PokenModel) {
-    LaunchedEffect(Unit) {viewModel.loadHabitats() }
+    LaunchedEffect(Unit) {viewModel.loadHabitats() }// Carga al iniciar la vista el listado de los habitats
+
     Column(Modifier
             .fillMaxSize()
             .padding(top = 20.dp)
@@ -50,10 +53,10 @@ fun HabitatView(navegador: NavHostController, viewModel: PokenModel) {
                 Card(Modifier
                     .padding(4.dp)
                     .clickable{
-                        val id= habitat.url
+                        val id= habitat.url     //busca la id del habitat
                         .split("/").last { it.isNotEmpty() }
                         .toInt()
-                        viewModel.loadPokemon(id)
+                        viewModel.loadPokemon(id)       //tomando en base la id busca la lista de esos pokemones
                         navegador.navigate("pokemon")}
                 ) {
                     Text(habitat.name,Modifier.padding(3.dp).align(Alignment.CenterHorizontally))  //nombre del habitat seleccionado

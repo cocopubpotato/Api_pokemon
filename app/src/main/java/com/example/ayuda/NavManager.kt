@@ -7,14 +7,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 
-
+//ESTA COSA HORRIBLE
 @Preview(showBackground = true)
 @Composable
 fun NavManager() {
     val navController = rememberNavController()
-    val viewModel: PokenModel= viewModel()
+    val viewModel: PokenModel= viewModel() //para que todos puedan ver el modelo
     NavHost(navController, startDestination = "Habitat") {
-        composable("Habitat") {  //son tipo ruta los composable toncesse ponen igual a como establecimos los objetos
+        composable("Habitat") {
             HabitatView(navController, viewModel )
         }
         composable("pokemon"){
@@ -23,7 +23,5 @@ fun NavManager() {
         composable("detail") {
             DetailScreen(navController,viewModel)
         }
-
-        }
     }
-
+}

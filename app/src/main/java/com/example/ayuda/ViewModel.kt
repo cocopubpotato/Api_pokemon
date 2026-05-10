@@ -47,7 +47,7 @@ class PokenModel: ViewModel() {
         }
 
     }
-    fun loadHabitats() {
+    fun loadHabitats() { //lista individual de habitats
         viewModelScope.launch {
 
             val data =
@@ -65,7 +65,7 @@ class PokenModel: ViewModel() {
     }
 
     //es solo los detalles del pokemon seleccionado
-    fun loadPokenDeat(name: String){
+    fun loadPokenDeat(name: String){    //toda la info del pokemon seleccionado
         viewModelScope.launch { pokenDetail= API().getPokenDetail(name) }
 
     }

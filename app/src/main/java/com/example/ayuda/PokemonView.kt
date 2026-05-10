@@ -22,9 +22,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 
-//PASO 6
+//Paso 6
 
-//la interfaz de usuario
+//VISTA 2
+//El listado de los pokemones del habitat
 
 @Composable
 fun PokemonView(navegador: NavHostController, viewModel: PokenModel) { //llamamos al viewmodel que hicimos previamente

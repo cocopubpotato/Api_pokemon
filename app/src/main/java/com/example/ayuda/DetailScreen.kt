@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,6 +22,10 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil3.compose.AsyncImage
 
+//Paso 6
+
+//VISTA 3
+//ES LA VISTA DE LA INFORMACION INDIVIDUAL DEL POKEMON
 @Composable
 fun DetailScreen(navegador: NavHostController,vm:PokenModel) {
     val selected= vm.pokenDetail  //llamamos los detalles
@@ -38,8 +44,8 @@ fun DetailScreen(navegador: NavHostController,vm:PokenModel) {
                 Text("Details", fontSize = 30.sp)
             }
             Button(
-                onClick = { navegador.popBackStack() },
-            ) { Text("Return") }  //Boton de regreso
+                onClick = { navegador.popBackStack() })
+            { Text("Return") }  //Boton de regreso
         }
 
         Column(Modifier.fillMaxWidth()) {
@@ -52,19 +58,18 @@ fun DetailScreen(navegador: NavHostController,vm:PokenModel) {
                         contentDescription = selected.name,
                         Modifier.width(150.dp))
                 }
-                Column(Modifier.padding(25.dp).fillMaxWidth(), horizontalAlignment = Alignment.End) {
-                    Text("Type: ${selected.types.joinToString { type -> type.type.name }}")
+                Column(Modifier.padding(25.dp).fillMaxWidth(), horizontalAlignment = Alignment.End)  //lo ultimo se ocupa para que este del lado derecho
+                {
+                    Text("Type: ${selected.types.joinToString(" /") { type -> type.type.name }}") //como son 1 o 2 valores los encadenamos, lazy column tambien funciona
                     Text("Height: ${selected.height}")
                     Text("Weight: ${selected.weight}")
                 }
-                Column {
-                    selected.stats.forEach { stat ->
-                        Text(
-                            text = "${stat.stat.name}: ${stat.base_stat}"
-                        )
+
+                LazyColumn() {      //listado de los stats que si queremos que se vean como lista
+                    items(selected.stats) { stat ->
+                        Text("${stat.stat.name}: ${stat.base_stat}")
                     }
                 }
-
             }
         }
     }
