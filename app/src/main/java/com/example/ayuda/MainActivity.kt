@@ -18,8 +18,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AyudaTheme {
-                val ViewModel = PokenModel()
-                PokemonView(ViewModel)
+                NavManager()
             }
         }
     }
