@@ -44,6 +44,7 @@ fun HabitatView(navegador: NavHostController, viewModel: PokenModel) {
         },Modifier.align(Alignment.CenterHorizontally)) {
             Text("Habitat aleatorio")
         }
+        Button(onClick = {navegador.popBackStack()}) {Text("Return") }  //boton de retorno
 
 
         LazyColumn(Modifier.fillMaxWidth(),

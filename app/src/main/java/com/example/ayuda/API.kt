@@ -1,5 +1,15 @@
 package com.example.ayuda
 
+import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.floatPreferencesKey
+import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.preferencesDataStore
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlin.collections.emptyList
 
 
@@ -33,6 +43,33 @@ class API {
             response.body()
         }else{
             null
+        }
+    }
+}
+
+//clase para la preferencia
+class Favoritos(private val  contexto: Context){
+    companion object{
+        val Context.dataStore: DataStore<Preferences>
+                by preferencesDataStore(name = "configuraciones")
+        val Ident = intPreferencesKey(name = "id")
+        val NAME = stringPreferencesKey(name = "name")
+    }
+    //modo lectura de la info
+    val id: Flow<Int> = contexto.dataStore.data.map { preferences ->
+        preferences[Ident] ?: 0
+    }
+    val name: Flow<String> = contexto.dataStore.data.map { preferences ->
+        preferences[NAME] ?: "Sin nombre asignado"
+    }
+
+    //Guardar los datos
+    suspend fun guardarDatosPokens(
+        identify: Int, nombre: String
+    ){
+        contexto.dataStore.edit{settings->
+            settings[Ident]= identify
+            settings[NAME]= nombre
         }
     }
 }

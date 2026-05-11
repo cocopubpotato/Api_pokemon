@@ -1,5 +1,6 @@
 package com.example.ayuda
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,14 +14,21 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil3.compose.AsyncImage
+import kotlinx.coroutines.launch
 
 //Paso 6
 
@@ -29,6 +37,11 @@ import coil3.compose.AsyncImage
 @Composable
 fun DetailScreen(navegador: NavHostController,vm:PokenModel) {
     val selected= vm.pokenDetail  //llamamos los detalles
+
+    val context= LocalContext.current
+    val preferences= Favoritos(contexto= context)
+    val corrutina= rememberCoroutineScope()
+
     Column(Modifier
         .fillMaxSize()
         .padding(20.dp),
@@ -70,7 +83,16 @@ fun DetailScreen(navegador: NavHostController,vm:PokenModel) {
                         Text("${stat.stat.name}: ${stat.base_stat}")
                     }
                 }
+
+                Button(onClick = {
+                        corrutina.launch {
+                            preferences.guardarDatosPokens(selected.id,selected.name) }
+                        Log.d("Test","Agregaado a favoritos")
+                }){
+                    Text("Agregar a Favoritos")
+                }
             }
+
         }
     }
 }
