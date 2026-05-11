@@ -28,6 +28,9 @@ class PokenModel: ViewModel() {
     var pokenDetail by mutableStateOf<PokemonDetails?>(null)//detallitos poken
         private set
 
+    var favoritos by mutableStateOf(listOf<PokemonDetails>())  //listado de pokemones favoritos, lo guardamos aqui para simplicidad
+        private set
+
     fun loadPokemon(Id: Int){  //para cargar los datos
         viewModelScope.launch {
             val habitat = API().getHabitatFull(Id) // funcion que establecimos en archivo API     ,para que pueda conseguir los datos completos del habitat seleccionado
@@ -66,7 +69,11 @@ class PokenModel: ViewModel() {
 
     //es solo los detalles del pokemon seleccionado
     fun loadPokenDeat(name: String){    //toda la info del pokemon seleccionado
-        viewModelScope.launch { pokenDetail= API().getPokenDetail(name) }
+        viewModelScope.launch {
+            pokenDetail= API().getPokenDetail(name) }
+    }
 
+    fun addfavs(pokemon: PokemonDetails){       //se hace la funcion de agregado
+        favoritos= favoritos + pokemon
     }
 }

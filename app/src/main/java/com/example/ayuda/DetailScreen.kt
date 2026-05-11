@@ -14,21 +14,14 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil3.compose.AsyncImage
-import kotlinx.coroutines.launch
 
 //Paso 6
 
@@ -37,10 +30,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun DetailScreen(navegador: NavHostController,vm:PokenModel) {
     val selected= vm.pokenDetail  //llamamos los detalles
-
-    val context= LocalContext.current
-    val preferences= Favoritos(contexto= context)
-    val corrutina= rememberCoroutineScope()
+    val yaAgregado = vm.favoritos.any { it.id == selected?.id }
 
     Column(Modifier
         .fillMaxSize()
@@ -84,13 +74,18 @@ fun DetailScreen(navegador: NavHostController,vm:PokenModel) {
                     }
                 }
 
-                Button(onClick = {
-                        corrutina.launch {
-                            preferences.guardarDatosPokens(selected.id,selected.name) }
-                        Log.d("Test","Agregaado a favoritos")
+
+                Button(onClick = {  // agregar el pokemon a la lista de favoritos
+                    if (!yaAgregado && selected!= null) {       //para verificar que no se dupliquen
+                        vm.addfavs(it)
+                        Log.d("Test","Agregaado a favoritos")}
                 }){
-                    Text("Agregar a Favoritos")
+                    Text(if (yaAgregado) "Agregado" else "Agregar a Favoritos")
                 }
+
+
+
+
             }
 
         }
