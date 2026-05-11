@@ -7,14 +7,14 @@ se encuentra con comentarios y pasos asignados para el entendimiento y futuro de
 
 
 Actualmente incluye:
-        busqueda por nombre
-        listado de habitats
-        listado de pokemones por habitat
-        seleccion aleatoria de habitat
-        listado de detalles de pokemon individual
-        almacenamiento de nombre de entrenador
-        almacenamiento de seleccion de pokemons favoritos
-        listado de pokemons favoritos
+        busqueda por nombre,
+        listado de habitats,
+        listado de pokemones por habitat,
+        seleccion aleatoria de habitat,
+        listado de detalles de pokemon individual,
+        almacenamiento de nombre de entrenador,
+        almacenamiento de seleccion de pokemons favoritos,
+        listado de pokemons favoritos,
 
 
 requisitos no anotados son modificar los archivos de build gradel.kts(module:app), androidmanifest.xml y libs.version.toml
